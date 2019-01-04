@@ -1,0 +1,11 @@
+--- a/glcddrivers/futabaMDM166A.c.org	2017-12-19 10:07:03.744675202 +0100
++++ b/glcddrivers/futabaMDM166A.c	2017-12-19 10:07:33.632673992 +0100
+@@ -142,7 +142,7 @@
+     return false;
+   }
+ 
+-  int const PATH_OUT[1] = { 0xff7f0004 };
++  int const PATH_OUT[1] = { (int)0xff7f0004 };
+   char buf[64];
+   hid_return ret;
+ 

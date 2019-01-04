@@ -1,0 +1,37 @@
+--- update_timers	2008-06-15 20:10:23.000000000 +0200
++++ update_timers.g2v	2008-11-20 00:45:05.000000000 +0100
+@@ -8,10 +8,10 @@
+ PASS="*****"
+ 
+ # The directory you have put the epg2timers binary and loadvdr.pl into.
+-TOOLDIR=$HOME/bin
++TOOLDIR=/usr/bin
+ 
+ # The path of your channels.conf file.
+-CHANPATH=$HOME/vdrconfig/channels.conf
++CHANPATH=/etc/vdr/channels.conf
+ 
+ # The path where you want your update_timers log file.
+ LOG=/tmp/update_timers.log
+@@ -21,7 +21,7 @@
+ date >> $LOG
+ wget -q --post-data "login=true&loginName=$USER&loginPassword=$PASS" "http://tvtv.de/tvtv/mytvtv/index.vm?mainTemplate=web/joblist.vm&jl_format=2&jl_view=1&jl_images=1&jl_timeline=1&jl_controls=1&lang=de" -O merkliste.html >> $LOG
+ 
+-if [ -s $MERKLISTE ] ; then
++if [ -s merkliste.html ] ; then
+ # convert merkliste.html to timers.conf format.
+    if $TOOLDIR/epg2timers $CHANPATH < merkliste.html > timers.new 2>>$LOG; then
+    
+--- Makefile.org	1970-01-01 01:00:00.000000000 +0100
++++ Makefile	2008-11-20 00:40:39.000000000 +0100
+@@ -0,0 +1,10 @@
++all: epg2timers
++
++epg2timers:  epg2timers.cxx
++	g++ epg2timers.cxx -o $@
++
++clean:
++	$(RM) epg2timers *.o *~
++
++
++
