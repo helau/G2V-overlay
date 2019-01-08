@@ -30,5 +30,6 @@ src_install() {
 	insinto /etc
 	doins etc/*
 	find ${ED} -name "*.sh" -print0|xargs -0 chmod +x
+	chmod +x ${ED}/etc/gen2vdr/applications/* ${ED}/etc/init.d/* ${ED}/etc/vdr.d/scripts/*
 	sed -i ${ED}/etc/g2v-release -e "s% git .*% git ${EGIT_VERSION:0:8}\"%"
 }
